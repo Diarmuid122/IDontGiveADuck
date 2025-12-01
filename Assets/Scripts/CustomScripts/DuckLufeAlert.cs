@@ -39,7 +39,10 @@ public class DuckLufeAlert : MonoBehaviour
 
     public void DestroyAlert()
     {
-        Destroy(gameObject);
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
     }
 
 

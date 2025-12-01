@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6908825711674646287}
   m_Layer: 0
   m_Name: DecoyDuck_L
-  m_TagString: Untagged
+  m_TagString: DecoyDuck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
