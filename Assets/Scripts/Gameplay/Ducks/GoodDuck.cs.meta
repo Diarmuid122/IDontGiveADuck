@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: c485420d16e31e244bfd3faf09048e17
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - destroyEffect: {instanceID: 0}
+  - clickSound: {instanceID: 0}
+  - successParticles: {instanceID: 0}
+  - successTextPrefab: {fileID: 3769965038279528059, guid: 3dc4ef3d68bd7dd40a588264af280356, type: 3}
+  - spriteRenderer: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

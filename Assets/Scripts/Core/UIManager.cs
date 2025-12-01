@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 /// <summary>
 /// UIManager - Centralised UI system for the game
@@ -16,17 +17,20 @@ using TMPro;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
+    //Singleton
+    public static UIManager Instance { get; private set; }
     // ===== UI ELEMENTS =====
     // These are references to UI components that will be set in the Unity Inspector
     // The [SerializeField] attribute makes private fields visible in the Inspector
-    
+
     [Header("HUD Elements")]
     [SerializeField] private TextMeshProUGUI scoreText;      // Shows current score
     [SerializeField] private TextMeshProUGUI timerText;      // Shows time remaining
     [SerializeField] private TextMeshProUGUI livesText;      // Shows remaining lives
     [SerializeField] private TextMeshProUGUI levelText;      // Shows current level number
     [SerializeField] private TextMeshProUGUI progressText;   // Shows progress (ducks clicked/required)
-    
+    [SerializeField] private TextMeshProUGUI scoreUpdate;
+
     [Header("Game Over Panel")]
     [SerializeField] private GameObject gameOverPanel;       // Container for game over UI
     [SerializeField] private TextMeshProUGUI gameOverTitle;  // "Level Complete!" or "Level Failed!"
@@ -55,10 +59,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private bool showDebugInfo = true;      // Toggle to show debug information on screen
     [SerializeField] private Color timerWarningColor = Color.red;  // Colour when time is running low
     [SerializeField] private float timerWarningThreshold = 10f;    // Time remaining when warning starts
-    
+    [SerializeField] private Color scoreUpdateColor;
+
+    //[Header("FloatingText")]
+    //public GameObject floatingScoreText;
+
     // ===== PRIVATE VARIABLES =====
     private Color originalTimerColor;  // Stores the original timer colour to restore it later
-    
+    private Color originalScoreColor;
+
     #region Unity Lifecycle
     // Unity automatically calls these methods at specific times during the game's lifecycle
     
@@ -68,10 +77,27 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Keep alive when scenes change
+          
+        }
+        else
+        {
+            // Destroy duplicate instances
+            Destroy(gameObject);
+        }
+
         // Store the original timer colour so we can restore it later
         if (timerText != null)
             originalTimerColor = timerText.color;
         
+        if (scoreText != null)
+            originalScoreColor = timerText.color;
+
+
+        scoreUpdateColor = Color.forestGreen;
         // Set up all button click listeners
         SetupButtonListeners();
     }
@@ -155,9 +181,17 @@ public class UIManager : MonoBehaviour
     public void UpdateScore(int score)
     {
         if (scoreText != null)
+        {
             scoreText.text = $"Score: {score:N0}";
+            scoreText.color = scoreUpdateColor;
+            Invoke("ResetColor", 0.5f);
+        }
     }
-    
+    public void DisplayScoreChange(int pointValue)
+    {
+       
+    }
+
     /// <summary>
     /// Updates the timer display and changes colour when time is running low
     /// Converts seconds to minutes:seconds format and shows warning colour
@@ -213,6 +247,11 @@ public class UIManager : MonoBehaviour
         }
     }
     
+    private void ResetColor()
+    {
+        scoreText.color = originalScoreColor;
+    }
+
     #endregion
     
     #region Game State Updates

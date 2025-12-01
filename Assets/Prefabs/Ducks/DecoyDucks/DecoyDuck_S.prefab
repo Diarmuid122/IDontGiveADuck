@@ -152,10 +152,11 @@ MonoBehaviour:
   moveSpeed: 0
   destroyEffect: {fileID: 0}
   clickSound: {fileID: 0}
+  duckLifeAlert: {fileID: 9207257105911751431, guid: 4c79a477b44ed23469be5c52f8855d5d, type: 3}
+  alarmActive: 0
   penaltyParticles: {fileID: 0}
   penaltySound: {fileID: 0}
   timePenalty: 5
-  penaltyTextPrefab: {fileID: 0}
+  penaltyTextPrefab: {fileID: 4884975913400443524, guid: b739fd8572a52344fbe447e1e88fd738, type: 3}
   spriteRenderer: {fileID: 251516885786172104}
-  decoyColor: {r: 1, g: 0, b: 0, a: 1}
   subtleVisualDifference: 1

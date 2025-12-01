@@ -1,2 +1,28 @@
 fileFormatVersion: 2
 guid: fb3ba25ce841d5847882083e340aa026
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - scoreText: {instanceID: 0}
+  - timerText: {instanceID: 0}
+  - livesText: {instanceID: 0}
+  - levelText: {instanceID: 0}
+  - progressText: {instanceID: 0}
+  - gameOverPanel: {instanceID: 0}
+  - gameOverTitle: {instanceID: 0}
+  - finalScoreText: {instanceID: 0}
+  - restartButton: {instanceID: 0}
+  - nextLevelButton: {instanceID: 0}
+  - pausePanel: {instanceID: 0}
+  - resumeButton: {instanceID: 0}
+  - pauseRestartButton: {instanceID: 0}
+  - instructionsPanel: {instanceID: 0}
+  - startGameButton: {instanceID: 0}
+  - testLevel12Button: {instanceID: 0}
+  - floatingScoreText: {fileID: 7789304142302358284, guid: 02484d79e5567874b8c6c6df8486da5f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -15,6 +15,8 @@ public abstract class BaseDuck : MonoBehaviour
     [Header("Visual Feedback")]
     [SerializeField] protected ParticleSystem destroyEffect;
     [SerializeField] protected AudioClip clickSound;
+    [SerializeField] public GameObject duckLifeAlert;
+    [SerializeField] private bool alarmActive = false;
     
     // Protected properties accessible to child classes
     protected float currentLifetime;
@@ -185,6 +187,7 @@ public abstract class BaseDuck : MonoBehaviour
             // Create effect at duck position
             ParticleSystem effect = Instantiate(destroyEffect, transform.position, transform.rotation);
             Destroy(effect.gameObject, effect.main.duration);
+           
         }
         
         // Play sound effect
@@ -192,7 +195,12 @@ public abstract class BaseDuck : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(clickSound, transform.position);
         }
-        
+        if (duckLifeAlert != null)
+        {
+            //duckLifeAlert.GetComponent<DuckLufeAlert>().alertActive = false;
+            //.Instance.DestroyAlert()
+            duckLifeAlert.GetComponent<DuckLufeAlert>().DestroyAlert();
+        }
         // Remove duck from scene
         Destroy(gameObject);
     }
@@ -223,7 +231,7 @@ public abstract class BaseDuck : MonoBehaviour
         // Default implementation - can be overridden
         Debug.Log($"{GetType().Name} spawned at position {transform.position} with {currentLifetime}s lifetime");
     }
-    
+
     /// <summary>
     /// Called when duck lifetime is getting low (< 1 second)
     /// </summary>
@@ -231,6 +239,16 @@ public abstract class BaseDuck : MonoBehaviour
     {
         // Default implementation - visual warning
         // Override for custom low-lifetime effects
+        if (duckLifeAlert != null) 
+        {
+            if (alarmActive == false)
+            {
+                Debug.Log("About to despawn");
+                duckLifeAlert = Instantiate(duckLifeAlert, transform.position, Quaternion.identity);
+                alarmActive = true;
+            } 
+        }
+
     }
     
     #endregion

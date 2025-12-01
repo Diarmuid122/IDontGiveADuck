@@ -129,6 +129,7 @@ public class DecoyDuck : BaseDuck
         if (penaltyTextPrefab != null)
         {
             GameObject penaltyText = Instantiate(penaltyTextPrefab, transform.position, Quaternion.identity);
+            penaltyText.GetComponent<TimeText>().duckPenalty = timePenalty;
             // Assume the prefab has a script to handle floating animation
         }
         

@@ -16,7 +16,7 @@ public class GoodDuck : BaseDuck
     protected override void Start()
     {
         base.Start();
-        
+       
     }
     
     #region Abstract Implementation
@@ -30,7 +30,10 @@ public class GoodDuck : BaseDuck
         {
             GameManager.Instance.OnGoodDuckClicked(this);
         }
+
         
+        
+
         // Play success feedback
         PlaySuccessEffects();
         
@@ -69,6 +72,7 @@ public class GoodDuck : BaseDuck
     protected override void OnLifetimeLow()
     {
         base.OnLifetimeLow();
+            
         // Could add sprite swap or animation here if needed
     }
     
@@ -81,6 +85,7 @@ public class GoodDuck : BaseDuck
     /// </summary>
     private void PlaySuccessEffects()
     {
+        
         // Particle effect
         if (successParticles != null)
         {
@@ -94,11 +99,18 @@ public class GoodDuck : BaseDuck
         {
             AudioManager.Instance.PlayDuckClickGood(transform.position);
         }
-        
+
+        if (UIManager.Instance != null)
+        {
+            
+        }
         // Floating score text (optional)
         if (successTextPrefab != null)
         {
-            GameObject scoreText = Instantiate(successTextPrefab, transform.position, Quaternion.identity);
+            Debug.Log("Score");
+
+            GameObject floatingText = Instantiate(successTextPrefab, transform.position, Quaternion.identity);
+            floatingText.GetComponent<ScoreText>().duckScore = pointValue;
             // Assume the prefab has a script to handle floating animation
         }
     }
